@@ -1,0 +1,5 @@
+# Sensitive or generated files
+.openclaw/state/
+.openclaw/cache/
+*.log
+.DS_Store
