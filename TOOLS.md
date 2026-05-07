@@ -37,6 +37,35 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+### Brew Tools (Prodüksiyon)
+
+| Araç | Versiyon | Ne işe yarar |
+|------|---------|-------------|
+| ffmpeg | brew | Video/ses dönüşüm, kırpma, birleştirme |
+| exiftool | 13.55 | RAW/video metadata okuma |
+| imagemagick | 7.1.2 | Batch thumbnail, resize (magick ile) |
+| mediainfo | 26.01 | Video codec, bitrate, çözünürlük analizi |
+| HandBrakeCLI | 1.11.1 | Profesyonel video encoding |
+| yt-dlp | 2026.03.17 | Video indirme (YouTube, vb.) |
+| rclone | 1.74.0 | Bulut/NAS dosya yönetimi |
+
+### macOS İzinleri
+
+| İzin | Durum |
+|------|-------|
+| Screen Recording | ✅ Ayarlandı |
+| Accessibility | ✅ Çalışıyor |
+| Calendar | ✅ Erişim var |
+| Full Disk Access | Henüz gerekmedi |
+
+### GitHub
+
+- **Hesap:** mefatiihh
+- **Repo:** jarvis-kayit (private)
+- **Token:** Keychain'de kayıtlı
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.
 
 ## Related
