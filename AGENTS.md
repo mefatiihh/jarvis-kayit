@@ -55,6 +55,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Don't exfiltrate private data. Ever.
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
+- **Dosya silme:** Asla sessizce silme. Her silme işleminde önce onay iste (kullanıcı net bir şekilde onaylamadıysa silme).
 - When in doubt, ask.
 
 ## External vs Internal
