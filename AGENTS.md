@@ -56,6 +56,8 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
 - **Dosya silme:** Asla sessizce silme. Her silme işleminde önce onay iste (kullanıcı net bir şekilde onaylamadıysa silme).
+  - 🎬 **Değerli dosyalar** (MP4, MOV, RAW, MP3, PDF, PSD, AI, projeler vs.) → **mutlaka onay iste**
+  - 🗑️ **Çöpler** (geçici dosyalar, cache, .DS_Store, loglar, cookies) → sormana gerek yok, sil geç
 - When in doubt, ask.
 
 ## External vs Internal
