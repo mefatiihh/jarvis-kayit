@@ -24,3 +24,16 @@
 
 - Ufuk Abi ile irtibat
 - Basketbol maç kurguları henüz yapılmadı → ödeme öncesi kurgu + teslim
+
+---
+
+## Yaklaşan Çekimler
+
+| Tarih | Proje | Tahmini Ücret | Müşteri |
+|-------|-------|--------------|---------|
+| 10 May 2026 | Taha Akgül Spor Salonu | 7.500 ₺ | — |
+| 13-14 May 2026 | JW Marriot Etkinlik Çekimi | 15.000 ₺ | — |
+| 6-7 Haz 2026 | Onyx İncek Lansman | — | — |
+
+**Toplam Beklenen Ciro:** 22.500 ₺ + 
+**Toplam Alacak:** 17.500 ₺ +
