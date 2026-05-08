@@ -71,3 +71,9 @@ Add whatever helps you do your job. This is your cheat sheet.
 ## Related
 
 - [Agent workspace](/concepts/agent-workspace)
+
+### Browser Tercihleri
+
+- **Safari:** Basit URL açmaları (GitHub, sendgb, google drive vs.)
+- **Chrome (openclaw browser):** YouTube, arama, sayfa kontrolü gereken işler
+- **YouTube Premium:** Chrome profilinde oturum açık → reklamsız
