@@ -1,4 +1,5 @@
 # Sensitive or generated files
+.openclaw/
 .openclaw/state/
 .openclaw/cache/
 *.log
