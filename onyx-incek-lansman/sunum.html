@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX İNCEK — Lansman Filmi Konsepti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #f0f0f0;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide.active { display: flex; }
+
+/* Background gradient overlay */
+.bg-onyx {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 40%, #0d0d0d 100%);
+}
+.bg-dark { background: #0a0a0a; }
+.bg-emerald {
+  background: linear-gradient(135deg, #0a0a0a 0%, #0d1f1a 50%, #0a0a0a 100%);
+}
+.bg-gold {
+  background: linear-gradient(135deg, #1a1206 0%, #2a1f0a 50%, #1a1206 100%);
+}
+
+/* Decorative Onyx crystal elements */
+.crystal-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,215,0,0.1) 40px, rgba(255,215,0,0.1) 41px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(0,168,107,0.1) 40px, rgba(0,168,107,0.1) 41px);
+}
+
+/* Content containers */
+.content {
+  max-width: 1100px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  line-height: 1.1;
+}
+
+h1 .highlight {
+  background: linear-gradient(135deg, #d4a853, #f0d68a, #d4a853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  color: #d4a853;
+}
+
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #d4a853;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #b0b0b0;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: #d4a853;
+  letter-spacing: 2px;
+  margin-top: 16px;
+}
+
+/* Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,168,83,0.15);
+  border-radius: 12px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.card .number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  color: #d4a853;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.card h4 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card ul { list-style: none; padding: 0; }
+.card ul li {
+  font-size: 14px;
+  color: #b0b0b0;
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.card ul li:before {
+  content: "◆";
+  color: #d4a853;
+  position: absolute;
+  left: 0;
+  font-size: 8px;
+  top: 7px;
+}
+
+/* Timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.timeline-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,168,83,0.15);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.timeline-item .time {
+  font-size: 14px;
+  color: #d4a853;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.timeline-item .label {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* Scene flow */
+.scene-flow {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.scene-card {
+  min-width: 220px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,168,83,0.15);
+  border-radius: 10px;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.scene-card .scene-time {
+  font-size: 12px;
+  color: #d4a853;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.scene-card h5 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #f0f0f0;
+}
+
+.scene-card p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #999;
+}
+
+/* Stats display */
+.stat-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px;
+  color: #d4a853;
+  font-weight: 300;
+}
+
+.stat .desc {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 20px;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #888;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.nav button:hover { background: rgba(212,168,83,0.3); color: #fff; }
+.nav button.active { background: #d4a853; color: #000; font-weight: 600; }
+
+.nav .arrow {
+  background: transparent;
+  color: #d4a853;
+  font-size: 20px;
+  width: auto;
+  padding: 0 8px;
+}
+
+.nav .arrow:hover { background: rgba(212,168,83,0.15); }
+
+/* Slide number */
+.slide-counter {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  font-size: 14px;
+  color: #555;
+  letter-spacing: 2px;
+  z-index: 100;
+  font-weight: 300;
+}
+
+/* Prompt box */
+.prompt-box {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(212,168,83,0.2);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 12px;
+  font-family: 'Inter', monospace;
+  color: #aaa;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+.tag-gold { background: rgba(212,168,83,0.15); color: #d4a853; border: 1px solid rgba(212,168,83,0.2); }
+.tag-green { background: rgba(0,168,107,0.15); color: #00a86b; border: 1px solid rgba(0,168,107,0.2); }
+.tag-white { background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.1); }
+
+/* Image placeholder */
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(212,168,83,0.05), rgba(0,168,107,0.05));
+  border: 1px dashed rgba(212,168,83,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.float-right { float: right; margin-left: 30px; max-width: 40%; }
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.gold-text { color: #d4a853; }
+.large-text { font-size: 22px; font-weight: 300; line-height: 1.6; }
+
+/* Concept comparison */
+.concept-card {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,168,83,0.12);
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+}
+
+.concept-card .badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: #d4a853;
+  color: #000;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-counter" id="slideCounter">01 / 18</div>
+
+<!-- SLIDE 1: KAPAK -->
+<div class="slide active bg-onyx" data-slide="1">
+  <div class="crystal-bg"></div>
+  <div class="content text-center">
+    <h4>MRX Prodüksiyon × Onyx Renkleri</h4>
+    <h1 style="margin-top: 20px;">
+      <span class="highlight">PRESTİJİN</span><br>
+      KEŞFİ
+    </h1>
+    <p class="subtitle">ONYX İncek · Lansman Filmi Konsepti</p>
+    <div style="margin-top: 50px;">
+      <span class="tag tag-gold">6 Haziran 2026</span>
+      <span class="tag tag-green">5-7 dk Lansman Filmi</span>
+      <span class="tag tag-white">Canlı Aksiyon Entegrasyonu</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: PROJE HAKKINDA -->
+<div class="slide bg-dark" data-slide="2">
+  <div class="content">
+    <h4>Proje Hakkında</h4>
+    <h2>ONYX İncek</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="num">454</div><div class="desc">Konut</div></div>
+      <div class="stat"><div class="num">4</div><div class="desc">Blok</div></div>
+      <div class="stat"><div class="num">21</div><div class="desc">Kat</div></div>
+      <div class="stat"><div class="num">40.685</div><div class="desc">m² İnşaat Alanı</div></div>
+      <div class="stat"><div class="num">1+1</div><div class="desc">· 2+1</div></div>
+    </div>
+    <div class="grid-2 mt-40">
+      <div>
+        <p>Ankara'nın gözde semtlerinden İncek'te, Turgut Özal Bulvarı üzerinde yükselen Onyx İncek; modern mimarinin zarafetini fonksiyonel yaşam alanlarının ihtişamıyla harmanlıyor.</p>
+        <p style="margin-top: 16px; color: #d4a853; font-style: italic;">"Prestijin Keşfi"</p>
+      </div>
+      <div>
+        <div class="card">
+          <h4 style="color: #d4a853;">Konum Avantajları</h4>
+          <ul>
+            <li>Turgut Özal Bulvarı aksında</li>
+            <li>Ana ulaşım akslarına yakınlık</li>
+            <li>Çevresinde prestijli projeler</li>
+            <li>Yükselen değer: İncek bölgesi</li>
+            <li>Yaşam + Yatırım avantajı</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: MARKA STRATEJİSİ -->
+<div class="slide bg-emerald" data-slide="3">
+  <div class="content">
+    <h4>Marka Stratejisi</h4>
+    <h2>Onyx Ailesi & "Keşif" Teması</h2>
+    <p class="large-text mt-20">Onyx markası, tüm projelerinde <span class="gold-text">"Keşif"</span> kavramını merkeze alıyor. Her proje keşfin farklı bir yönünü temsil ediyor.</p>
+    <div class="grid-3 mt-20">
+      <div class="card"><div class="number">Şehir</div><p>Onyx Metro<br><span style="color:#888;font-size:12px;">"Şehrin Keşfi"</span></p></div>
+      <div class="card"><div class="number">Konfor</div><p>Onyx Ümitköy<br><span style="color:#888;font-size:12px;">"Konforlu Yaşamın Keşfi"</span></p></div>
+      <div class="card" style="border-color: rgba(212,168,83,0.4);"><div class="number">PRESTİJ</div><p style="color: #d4a853;">Onyx İncek<br><span style="color:#d4a853;font-size:12px;">"Prestijin Keşfi"</span></p></div>
+    </div>
+    <p class="mt-20" style="font-size: 16px; color: #888;"><span style="color: #d4a853;">✦</span> Konseptimiz, bu "keşif" temasını fiziksel ve metaforik bir yolculuğa dönüştürüyor.</p>
+  </div>
+</div>
+
+<!-- SLIDE 4: ÖNERİLEN KONSEPT ÖZET -->
+<div class="slide bg-dark" data-slide="4">
+  <div class="content">
+    <h4>Önerilen Konsept</h4>
+    <h2>"Prestijin Katmanları"</h2>
+    <div style="display: flex; gap: 40px; margin-top: 30px;">
+      <div style="flex: 1;">
+        <p class="large-text">Tıpkı bir onyx taşının katman katman oluşması gibi, ONYX İncek de dört katmanda yükselen bir prestij hikayesi anlatıyor.</p>
+        <div style="margin-top: 20px;">
+          <span class="tag tag-gold">✦ Onyx taşı metaforu</span>
+          <span class="tag tag-green">✦ 4 katmanlı anlatım</span>
+          <span class="tag tag-white">✦ Canlı aksiyon entegrasyonu</span>
+          <span class="tag tag-gold">✦ Anamorphic LED efektleri</span>
+          <span class="tag tag-green">✦ 6 dakikalık film</span>
+        </div>
+      </div>
+      <div style="flex: 1;">
+        <div class="card" style="border-color: rgba(212,168,83,0.3);">
+          <h4 style="color: #d4a853;">Uygulama Notu</h4>
+          <p style="font-size: 14px;">3D modelleme gerektirmez. After Effects + TouchDesigner + koreografi ile tamamen prodüksiyon ekibinin mevcut yetkinlikleri dahilinde üretilebilir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: AKIŞ ŞEMASI -->
+<div class="slide bg-dark" data-slide="5">
+  <div class="content">
+    <h4>Film Akışı</h4>
+    <h2>6 Perde · 6 Dakika</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time">0:00</div>
+        <div class="label">Karanlıktan<br>Doğuş</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">1:30</div>
+        <div class="label">Katman 1<br>Lokasyon</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">2:30</div>
+        <div class="label">Katman 2<br>Mimari</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">3:30</div>
+        <div class="label">Katman 3<br>Yaşam</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">4:30</div>
+        <div class="label">✦ LIVE ✦<br>Işık Gösterisi</div>
+      </div>
+      <div class="timeline-item" style="border-color: rgba(212,168,83,0.4);">
+        <div class="time" style="color: #f0d68a;">5:30</div>
+        <div class="label" style="color: #d4a853;">Grand Final<br>ONYX İNCEK</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: PERDE 1 -->
+<div class="slide bg-onyx" data-slide="6">
+  <div class="content">
+    <h4>Perde 1 · 0:00 - 1:30</h4>
+    <h3>DERİNLİKTEN DOĞUŞ</h3>
+    <div class="grid-2">
+      <div>
+        <p><span style="color: #d4a853;">"Önce karanlık vardı..."</span></p>
+        <p>Tamamen siyah ekran. Derinlerden gelen düşük frekanslı bir uğultu (sub bass). Ekranın ortasında küçük bir ışık parlaması — onyx taşının mikroskobik kristal yapısı ortaya çıkar.</p>
+        <p style="margin-top: 12px; font-size: 14px; color: #888;">
+          <span style="color: #d4a853;">Ses:</span> Ambient drone + ters zil (reverse cymbal)<br>
+          <span style="color: #d4a853;">Duygu:</span> Merak, beklenti, derinlik
+        </p>
+      </div>
+      <div>
+        <div class="image-placeholder" style="height: 180px;">
+          🎨 Midjourney: Extreme macro close-up of black onyx crystalizing in darkness, golden light particle emerging
+        </div>
+        <div class="prompt-box">/imagine Extreme macro close-up of a polished black onyx gemstone with golden veins, crystalizing in complete darkness, a single warm light particle emerging from the center, cinematic 8k photography, dark moody atmosphere, high contrast</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: PERDE 2 - KATMANLAR -->
+<div class="slide bg-dark" data-slide="7">
+  <div class="content">
+    <h4>Perde 2-3-4 · 1:30 - 4:30</h4>
+    <h3>DÖRT KATMAN · DÖRT HİKAYE</h3>
+    <p style="margin-bottom: 20px;">Her katman arası net bir "whoosh + impact" ile ayrılır. Müziğe her katmanda yeni bir enstrüman eklenir.</p>
+    <div class="grid-4">
+      <div class="card">
+        <div class="number">01</div>
+        <h5 style="color: #d4a853; font-size: 14px;">LOKASYON</h5>
+        <p style="font-size: 12px;">Ankara silüeti, İncek'in yükselen değeri, Turgut Özal Bulvarı, ulaşım aksları</p>
+      </div>
+      <div class="card">
+        <div class="number">02</div>
+        <h5 style="color: #d4a853; font-size: 14px;">MİMARI</h5>
+        <p style="font-size: 12px;">Bina yükselir, cam cepheler, ışık oyunları, geometrik desenler, bloklar</p>
+      </div>
+      <div class="card">
+        <div class="number">03</div>
+        <h5 style="color: #d4a853; font-size: 14px;">YAŞAM</h5>
+        <p style="font-size: 12px;">İç mekan turları, geniş pencereler, ferah salon, fonksiyonel mutfak</p>
+      </div>
+      <div class="card" style="border-color: rgba(212,168,83,0.3);">
+        <div class="number">04</div>
+        <h5 style="color: #d4a853; font-size: 14px;">PRESTİJ</h5>
+        <p style="font-size: 12px;">Tüm katmanlar birleşir, onyx parıldar, logo belirir, altın ışıklar</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: PERDE 5 - LIVE ACTION -->
+<div class="slide bg-emerald" data-slide="8">
+  <div class="content">
+    <h4>✦ Perde 5 · 4:30 - 5:30 ✦</h4>
+    <h3>CANLI IŞIK PERFORMANSI</h3>
+    <div class="grid-2">
+      <div>
+        <p><span style="color: #d4a853;">Burası "vay be" anı.</span></p>
+        <p>Film son perdesine yaklaşırken ekrandaki onyx taşı parçalanır. İçinden bir ışık süzülür.</p>
+        <p style="margin-top: 12px;"><span style="color: #d4a853;">✦</span> LED ekranda yukarı doğru yükselen bir ışık sütunu</p>
+        <p><span style="color: #d4a853;">✦</span> Performer, LED kostüm + LED stick'lerle sahneye çıkar</p>
+        <p><span style="color: #d4a853;">✦</span> Ekrandaki ışık, performer'ın eline geçmiş gibi görünür</p>
+        <p><span style="color: #d4a853;">✦</span> Işık + mükemmel senkron = tüyler ürpertici an</p>
+      </div>
+      <div>
+        <div class="image-placeholder" style="height: 180px;">
+          🎨 Midjourney: Silhouette of dancer on dark stage with glowing LED sticks, golden light trails, smoke/haze
+        </div>
+        <div class="prompt-box">/imagine Silhouette of a dancer in a dark stage performing with glowing LED sticks, trails of golden light tracing movement in the air, smoke on stage, dramatic side lighting, concert photography, high energy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: PERDE 6 - GRAND FINAL -->
+<div class="slide bg-gold" data-slide="9">
+  <div class="content text-center">
+    <h4 style="color: #000;">Perde 6 · 5:30 - 6:00</h4>
+    <h3 style="color: #1a1206;">GRAND FİNAL</h3>
+    <div style="margin-top: 40px;">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 80px; letter-spacing: 12px; color: #d4a853; text-shadow: 0 0 40px rgba(212,168,83,0.3);">
+        ONYX İNCEK
+      </div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #8a7330; letter-spacing: 6px; margin-top: 10px;">
+        PRESTİJİN KEŞFİ
+      </div>
+    </div>
+    <div style="margin-top: 40px; color: #554411; font-size: 16px;">
+      <p>Performer LED stick'lerle havaya "ONYX" yazar.</p>
+      <p>Tüm salon spotları logoya odaklanır.</p>
+      <p>2 saniye karanlık ve sessizlik...</p>
+      <p style="color: #000; font-weight: 500;">... ardından büyük bir patlama sesi + görsel şölen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: SUNUCU ÇIKIŞI OPSİYONU -->
+<div class="slide bg-dark" data-slide="10">
+  <div class="content">
+    <h4>Opsiyonel · Sunucu Çıkışı</h4>
+    <h2>Metro'dan Sonra: <span class="gold-text">Onyx Kırılması</span></h2>
+    <div class="grid-2">
+      <div>
+        <p>Önceki ONYX Metro lansmanında sunucuyu metro vagonundan çıkarmıştınız. Bu sefer farklı ve daha etkileyici:</p>
+        <div class="card" style="margin-top: 20px;">
+          <h4 style="color: #d4a853;">Yeni Nesil Çıkış</h4>
+          <ul>
+            <li>Filmdeki onyx taşı çatlar, ikiye ayrılır</li>
+            <li>Önceden kaydedilmiş kırılma efekti</li>
+            <li>Gerçek zamanlı: Ekrandaki kırıktan sunucu çıkar</li>
+            <li>LED ekran fiziksel olarak ikiye açılır (mekanik)</li>
+            <li>Sunucu ışık içinde belirir</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="image-placeholder" style="height: 180px;">
+          🎨 Midjourney: Luxury event stage with large LED screen cracking open, golden light pouring through the crack
+        </div>
+        <div class="prompt-box">/imagine Large LED screen on a luxury event stage cracking open like a gemstone, brilliant golden light pouring through the crack, a silhouette emerging from the light, dramatic stage lighting, smoke, cinematic</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: ALTERNATİF KONSEPTLER -->
+<div class="slide bg-dark" data-slide="11">
+  <div class="content">
+    <h4>Alternatif Konseptler</h4>
+    <div class="grid-2" style="gap: 20px;">
+      <div class="card" style="flex: 1;">
+        <h3 style="font-size: 24px;">Konsept 2<br><span style="font-size: 16px; color: #888;">Işıkla Çizilen Dünya</span></h3>
+        <p style="font-size: 13px; margin-top: 10px;">Karanlıkta bir lazer çizgisi belirir. Her çizgi bir yapıya dönüşür. Ankara haritası, İncek, bloklar — hepsi ışıkla çizilir.</p>
+        <p style="font-size: 12px; color: #888; margin-top: 8px;">✦ Görsel etki yüksek ✦ Daha fazla After Effects emeği ✦ Performer entegrasyonu mümkün</p>
+      </div>
+      <div class="card" style="flex: 1;">
+        <h3 style="font-size: 24px;">Konsept 3<br><span style="font-size: 16px; color: #888;">Keşif Yolculuğu</span></h3>
+        <p style="font-size: 13px; margin-top: 10px;">Bir anahtar/davetiye ile başlayan yolculuk. Her durak bir ipucu. İpuçları izleyiciyi ONYX İncek'e götürür.</p>
+        <p style="font-size: 12px; color: #888; margin-top: 8px;">✦ Hikaye anlatımı güçlü ✦ "Keşif" temasını en iyi yansıtan ✦ "Vay be" faktörü düşük</p>
+      </div>
+    </div>
+    <div class="card mt-20" style="border-color: rgba(212,168,83,0.3); background: rgba(212,168,83,0.05);">
+      <p style="font-size: 15px; color: #d4a853; text-align: center;">ÖNERİ: Konsept 1 "Prestijin Katmanları" ile ilerleyelim. En güçlü marka uyumu, en yüksek etki.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: TEKNİK ŞARTNAME -->
+<div class="slide bg-dark" data-slide="12">
+  <div class="content">
+    <h4>Teknik Şartname</h4>
+    <div class="grid-2" style="gap: 20px;">
+      <div>
+        <div class="card">
+          <h4 style="color: #d4a853;">LED Ekran</h4>
+          <ul>
+            <li>Min 8m × 4m (ideali 10m × 5m)</li>
+            <li>P3.9 pixel pitch veya daha iyi</li>
+            <li>16:9 format</li>
+            <li>Opsiyonel: mekanik açılma mekanizması</li>
+          </ul>
+        </div>
+        <div class="card mt-20">
+          <h4 style="color: #d4a853;">Işıklandırma</h4>
+          <ul>
+            <li>8-12 adet moving head</li>
+            <li>4 adet follow spot</li>
+            <li>LED RGBW zemin ışıkları</li>
+            <li>2 adet hazer (sis makinesi)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h4 style="color: #d4a853;">Ses</h4>
+          <ul>
+            <li>5.1 veya 7.1 surround</li>
+            <li>Güçlü subwoofer (kritik)</li>
+            <li>SMPTE/MIDI zaman senkronizasyonu</li>
+          </ul>
+        </div>
+        <div class="card mt-20">
+          <h4 style="color: #d4a853;">Ekip</h4>
+          <ul>
+            <li>1 Performer (LED dansçı)</li>
+            <li>Koreograf (3-4 hafta prova)</li>
+            <li>VJ / TouchDesigner operatörü</li>
+            <li>After Effects & Premiere ekipleri</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: PRODÜKSİYON PLANI -->
+<div class="slide bg-emerald" data-slide="13">
+  <div class="content">
+    <h4>Prodüksiyon Planı</h4>
+    <h2>6 Haziran'a Kadar</h2>
+    <div class="grid-4 mt-20" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="card" style="text-align: center;">
+        <div class="number" style="font-size: 32px;">9-15 May</div>
+        <h4 style="font-size: 12px;">Hafta 1</h4>
+        <p style="font-size: 11px;">Konsept onayı · Mekan kararı · Ekip kurulumu · AI sunum hazırlığı</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="number" style="font-size: 32px;">16-22 May</div>
+        <h4 style="font-size: 12px;">Hafta 2</h4>
+        <p style="font-size: 11px;">Müzik prodüksiyonu · Asset toplama · AE animasyon başlangıcı</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="number" style="font-size: 32px;">23-29 May</div>
+        <h4 style="font-size: 12px;">Hafta 3</h4>
+        <p style="font-size: 11px;">Animasyon · Koreografi provaları · Teknik ekip kurulumu</p>
+      </div>
+      <div class="card" style="text-align: center; border-color: rgba(212,168,83,0.3);">
+        <div class="number" style="font-size: 32px; color: #d4a853;">30 May-5 Haz</div>
+        <h4 style="font-size: 12px; color: #d4a853;">Hafta 4</h4>
+        <p style="font-size: 11px;">Son kurgu · Senkron testleri · Tam provalar · Teknik prova</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+      <span class="tag tag-gold" style="font-size: 16px; padding: 8px 24px;">✦ 6 HAZİRAN — LANSMAN ✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: AI GÖRSEL REFERANSLARI -->
+<div class="slide bg-dark" data-slide="14">
+  <div class="content">
+    <h4>AI Görsel Referansları</h4>
+    <p>Midjourney / DALL-E / Firefly için hazır prompt'lar</p>
+    <div class="grid-2" style="gap: 15px; margin-top: 20px;">
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ Açılış</div>
+        <p style="font-size: 11px;">Extreme macro close-up of a polished black onyx gemstone with golden veins, crystalizing in complete darkness, cinematic 8k</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ Ankara Silüeti</div>
+        <p style="font-size: 11px;">Aerial view of Ankara's modern skyline at golden sunset, Turgut Ozal Boulevard, high-end towers, cinematic drone photography</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ Bina Yükselişi</div>
+        <p style="font-size: 11px;">Ultra-modern luxury tower with glass facade reflecting sunset, geometric architecture, three connected towers, photorealistic</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ İç Mekan</div>
+        <p style="font-size: 11px;">Spacious modern living room with floor-to-ceiling windows, minimalist luxury design, natural sunlight, warm wood and marble</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ Anamorphic LED</div>
+        <p style="font-size: 11px;">Geometric abstract shapes bursting out of a large LED screen, 3D anamorphic illusion, glowing golden particles, cinematic</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 12px; color: #d4a853; margin-bottom: 4px;">✦ Performer</div>
+        <p style="font-size: 11px;">Silhouette of dancer on dark stage with glowing LED sticks, golden light trails, smoke, dramatic side lighting, concert photography</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15: MÜŞTERİ SUNUM METNİ -->
+<div class="slide bg-onyx" data-slide="15">
+  <div class="content">
+    <h4>Müşteri Sunum Metni</h4>
+    <div class="card" style="max-width: 900px; margin: 20px auto 0; padding: 40px;">
+      <p style="font-size: 16px; font-style: italic; line-height: 1.8; color: #ddd;">
+        "ONYX İncek lansmanı için geliştirdiğimiz konsept, markanızın adının ta kendisinden ilham alıyor: <span style="color: #d4a853;">Onyx taşı.</span>
+      </p>
+      <p style="font-size: 16px; font-style: italic; line-height: 1.8; color: #ddd; margin-top: 16px;">
+        Nasıl ki onyx taşı doğada katman katman oluşuyor ve her katman farklı bir güzellik barındırıyorsa, ONYX İncek de katman katman yükselen bir <span style="color: #d4a853;">prestij hikayesi</span> anlatacak.
+      </p>
+      <p style="font-size: 16px; font-style: italic; line-height: 1.8; color: #ddd; margin-top: 16px;">
+        4 katman, 4 hikaye: <span style="color: #d4a853;">Lokasyon · Mimari · Yaşam · Prestij</span>
+      </p>
+      <p style="font-size: 16px; font-style: italic; line-height: 1.8; color: #ddd; margin-top: 16px;">
+        Filmin zirvesinde, katmanlar birleşirken sahnede canlı bir <span style="color: #d4a853;">LED Işık Performansı</span> başlayacak. Işık ve hareketle izleyiciyi büyüleyecek bir an."
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16: ÖZET -->
+<div class="slide bg-dark" data-slide="16">
+  <div class="content text-center">
+    <h4>Özet</h4>
+    <div class="grid-2" style="gap: 20px; margin-top: 30px;">
+      <div class="card"><div class="number" style="font-size: 28px;">🎬</div><h4>5-7 Dk Film</h4><p style="font-size: 13px;">Katmanlı anlatım, profesyonel kurgu, After Effects animasyonları</p></div>
+      <div class="card"><div class="number" style="font-size: 28px;">✨</div><h4>Canlı Aksiyon</h4><p style="font-size: 13px;">LED ışık performansı ile film-gerçek geçişi, "vay be" anı</p></div>
+      <div class="card"><div class="number" style="font-size: 28px;">🎯</div><h4>Marka Uyumu</h4><p style="font-size: 13px;">Onyx taşı metaforu, "Prestijin Keşfi" teması, marka kimliği</p></div>
+      <div class="card"><div class="number" style="font-size: 28px;">📋</div><h4>Uygulanabilir</h4><p style="font-size: 13px;">30 günlük plan, net ekip tanımı, ölçeklenebilir bütçe</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17: İLETİŞİM -->
+<div class="slide bg-onyx" data-slide="17">
+  <div class="crystal-bg"></div>
+  <div class="content text-center">
+    <h4 style="margin-bottom: 20px;">MRX Prodüksiyon</h4>
+    <h1 style="font-size: 56px;">
+      <span class="highlight">Görüşmeye</span><br>
+      <span class="highlight">Hazırız</span>
+    </h1>
+    <div style="margin-top: 40px;">
+      <p style="font-size: 16px; color: #888;">ONYX İncek · Lansman Filmi Konsepti</p>
+      <p style="font-size: 14px; color: #555;">6 Haziran 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button class="arrow" onclick="changeSlide(-1)">‹</button>
+  <button class="active" onclick="goToSlide(1)">1</button>
+  <button onclick="goToSlide(2)">2</button>
+  <button onclick="goToSlide(3)">3</button>
+  <button onclick="goToSlide(4)">4</button>
+  <button onclick="goToSlide(5)">5</button>
+  <button onclick="goToSlide(6)">6</button>
+  <button onclick="goToSlide(7)">7</button>
+  <button onclick="goToSlide(8)">8</button>
+  <button onclick="goToSlide(9)">9</button>
+  <button onclick="goToSlide(10)">10</button>
+  <button onclick="goToSlide(11)">11</button>
+  <button onclick="goToSlide(12)">12</button>
+  <button onclick="goToSlide(13)">13</button>
+  <button onclick="goToSlide(14)">14</button>
+  <button onclick="goToSlide(15)">15</button>
+  <button onclick="goToSlide(16)">16</button>
+  <button onclick="goToSlide(17)">17</button>
+  <button class="arrow" onclick="changeSlide(1)">›</button>
+</div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 17;
+
+function updateSlide() {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
+  document.querySelectorAll('.nav button:not(.arrow)').forEach((btn, i) => {
+    btn.classList.toggle('active', i + 1 === currentSlide);
+  });
+  document.getElementById('slideCounter').textContent = 
+    String(currentSlide).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+}
+
+function changeSlide(dir) {
+  currentSlide += dir;
+  if (currentSlide < 1) currentSlide = totalSlides;
+  if (currentSlide > totalSlides) currentSlide = 1;
+  updateSlide();
+}
+
+function goToSlide(n) {
+  currentSlide = n;
+  updateSlide();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') changeSlide(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  if (e.key === 'Home') goToSlide(1);
+  if (e.key === 'End') goToSlide(totalSlides);
+});
+</script>
+
+</body>
+</html>

@@ -16,5 +16,5 @@
 ## Context
 
 - Mac'inde beraber işler yapacak, asistanı olarak yanında.
-- Cool ve esprili bir vibe tutturduk. Takılmayı seviyor ama iş konusunda ciddi.
-- Birlikte prodüksiyon işlerinde de çalışacaklar — ffmpeg, dosya yönetimi, otomasyon vs.
+- **İletişim tarzı:** Profesyonel, doğrudan, resmî. Samimi/arkadaşça üslup istemiyor. Gereksiz yorum, espri, imalı konuşma yok. İş konuşulur, çalışılır.
+- Birlikte prodüksiyon işlerinde çalışacaklar — ffmpeg, dosya yönetimi, otomasyon vs.

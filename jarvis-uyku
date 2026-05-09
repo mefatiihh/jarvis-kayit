@@ -1,0 +1,38 @@
+#!/bin/bash
+# Jarvis Uyku Kontrolü v2 - GUI şifre ile
+# Kullanım: jarvis-uyku ac   (kapak kapalıyken uyanık kal)
+#           jarvis-uyku kapat (normale dön)
+
+PID_FILE="/tmp/jarvis_caffeine.pid"
+
+case "$1" in
+  ac|on|aç)
+    echo "🔓 Uyanık kalma modu açılıyor..."
+    # macOS GUI'den şifre isteyerek pmset ayarlarını değiştir
+    osascript -e 'do shell script "pmset -a sleep 0 && pmset -a hibernatemode 0 && pmset -a disablesleep 1" with administrator privileges'
+    nohup caffeinate -dis > /dev/null 2>&1 &
+    echo $! > "$PID_FILE"
+    echo "✅ Kapak kapalıyken uyanık modu AKTİF"
+    ;;
+  kapat|off|uyu)
+    echo "🔒 Normal moda dönülüyor..."
+    osascript -e 'do shell script "pmset -a sleep 1 && pmset -a hibernatemode 3 && pmset -a disablesleep 0" with administrator privileges'
+    if [ -f "$PID_FILE" ]; then
+      kill $(cat "$PID_FILE") 2>/dev/null
+      rm -f "$PID_FILE"
+    fi
+    echo "✅ Normal uyku modu AKTİF"
+    ;;
+  durum|status)
+    echo "=== Uyku Durumu ==="
+    pmset -g 2>&1 | grep -E "sleep|hibernate|disable"
+    if [ -f "$PID_FILE" ]; then
+      echo "caffeinate: ÇALIŞIYOR (PID: $(cat $PID_FILE))"
+    else
+      echo "caffeinate: DURDU"
+    fi
+    ;;
+  *)
+    echo "Kullanım: jarvis-uyku {ac|kapat|durum}"
+    ;;
+esac
