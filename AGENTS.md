@@ -53,11 +53,12 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 ## Red Lines
 
 - Don't exfiltrate private data. Ever.
-- Don't run destructive commands without asking.
+- **Onay gerektiren işlemler:**
+  - 🗑️ **Dosya/kalsör silme (kalıcı).** _İstisna:_ `.DS_Store`, geçici dosyalar, cache, loglar — bunlar için onay gerekmez.
+  - 🌐 **Dış dünyaya bağlanma** (email gönderme, tweet/public post, API call, web'e veri yazma)
+- **Onay gerektirmeyen işlemler:** Okuma, dosya oluşturma/düzenleme, kod yazma, script çalıştırma, web arama, bilgi çekme, git push, sistem yapılandırması.
+- Sözlü/chat onayı yeterli. Ayrı bir onay süreci gerekmez.
 - `trash` > `rm` (recoverable beats gone forever)
-- **Dosya silme:** Asla sessizce silme. Her silme işleminde önce onay iste (kullanıcı net bir şekilde onaylamadıysa silme).
-  - 🎬 **Değerli dosyalar** (MP4, MOV, RAW, MP3, PDF, PSD, AI, projeler vs.) → **mutlaka onay iste**
-  - 🗑️ **Çöpler** (geçici dosyalar, cache, .DS_Store, loglar, cookies) → sormana gerek yok, sil geç
 - When in doubt, ask.
 
 ## External vs Internal
