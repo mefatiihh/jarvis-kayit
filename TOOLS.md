@@ -77,3 +77,10 @@ Add whatever helps you do your job. This is your cheat sheet.
 - **Safari:** Basit URL açmaları (GitHub, sendgb, google drive vs.)
 - **Chrome (openclaw browser):** YouTube, arama, sayfa kontrolü gereken işler
 - **YouTube Premium:** Chrome profilinde oturum açık → reklamsız
+
+### Browser Kullanım Kuralları
+
+- Her browser işlemi SONUNDA browser'ı kapat: `openclaw browser stop`
+- Aynı anda birden fazla browser tab'ı açma, öncekini kapat
+- Cron job'larda asla browser kullanma (Chrome açılmasına sebep olur)
+- WhatsApp kontrolü gibi işlemlerde iş biter bitmez browser'ı kapat
